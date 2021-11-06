@@ -61,6 +61,18 @@ public class libretto {
 	return lib; 
  }
  
-
+ public voto ricercacorso(String nomecorso)
+ {
+	 voto ris=null;
+	 for(voto v: this.voti)
+	 {
+//		 if(v.getNome().compareTo(nomecorso)==0) MENO CORRETTO DATO CHE GLI OGGETTI POSSONO ESSERE NON ORDINABILI
+		 if(v.getNome().equals(nomecorso))
+		 {
+			 ris = v;
+		 }
+	 }
+	 return ris;
+ }
 
 } 
