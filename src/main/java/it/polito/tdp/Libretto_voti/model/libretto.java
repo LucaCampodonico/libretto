@@ -1,17 +1,20 @@
 package it.polito.tdp.Libretto_voti.model;
 
-import java.util.ArrayList;
-import java.util.List;
+
+import java.util.*;
 public class libretto {
  private List<voto> voti;
+ private Map<String, voto> votimap;
  
  public libretto()
  {
 	 this.voti=new ArrayList<voto>();
+	 this.votimap=new HashMap<>();
  }
  public void add(voto v)
  {
 	 this.voti.add(v);
+	 this.votimap.put(v.getNome(), v);
  }
  public String toString()
  {
@@ -61,18 +64,59 @@ public class libretto {
 	return lib; 
  }
  
+ public boolean isduplicato(voto v)
+ { 
+	 
+//	 for(voto a: this.voti)
+//	 {
+//		 if(a.getNome().equals(v.getNome()) && a.getVoto()==v.getVoto())
+//		 {
+//			 return true;
+//		 }
+//	 }
+//	 return false;
+	 voto trovato=this.votimap.get(v.getNome());
+	 if(trovato==null)
+		 return false;
+	if(trovato.getVoto()==v.getVoto())
+		return true;
+	else 
+		return false;
+ }
+ 
+ 
+ public boolean existConfict(voto v)
+ {
+//	 for(voto a: this.voti)
+//	 {
+//		 if(a.getNome().equals(v.getNome()) && a.getVoto()!=v.getVoto())
+//		 {
+//			 return true;
+//		 }
+//	 }
+//	 return false;
+	 voto trovato=this.votimap.get(v.getNome());
+	 if(trovato==null)
+		 return false;
+	if(trovato.getVoto()!=v.getVoto())
+		return true;
+	else 
+		return false;
+ }
+ 
  public voto ricercacorso(String nomecorso)
  {
-	 voto ris=null;
-	 for(voto v: this.voti)
-	 {
-//		 if(v.getNome().compareTo(nomecorso)==0) MENO CORRETTO DATO CHE GLI OGGETTI POSSONO ESSERE NON ORDINABILI
-		 if(v.getNome().equals(nomecorso))
-		 {
-			 ris = v;
-		 }
-	 }
-	 return ris;
+//	 voto ris=null;
+//	 for(voto v: this.voti)
+//	 {
+////		 if(v.getNome().compareTo(nomecorso)==0) MENO CORRETTO DATO CHE GLI OGGETTI POSSONO ESSERE NON ORDINABILI
+//		 if(v.getNome().equals(nomecorso))
+//		 {
+//			 ris = v;
+//		 }
+//	 }
+//	 return ris;
+	 return this.votimap.get(nomecorso);
  }
 
 } 
